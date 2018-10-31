@@ -1,7 +1,7 @@
 # coding=utf-8
 import json
-
 import requests
+
 
 card_cache = dict()
 board_cache = dict()
@@ -40,7 +40,7 @@ def extractID(event, link):
     if len(link) <= 21:
         event.channel.send_message("please include a valid trello url").after(10).delete()
         return None
-    trello_id =  link.split("https://trello.com/c/")[1].split("/")[0]
+    trello_id = link.split("https://trello.com/c/")[1].split("/")[0]
     if trello_id.endswith(" "):
         trello_id = trello_id[:-1]
     return trello_id
