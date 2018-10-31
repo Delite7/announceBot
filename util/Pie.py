@@ -28,7 +28,7 @@ def bake(sub, info, title, size='x-large', show_labels=True, title_size=20):
     for e in empty:
         info.pop(e)
     wedges, labels, labels2 = sub.pie(info.values(), labels=info.keys() if show_labels else None, autopct='%1.1f%%',
-                                      explode=[0.05] * len(info.keys()), colors=real_colors if len(real_colors) == len(info) else None)
+                                      explode=[0.10] * len(info.keys()), colors=real_colors if len(real_colors) == len(info) else None)
     for i in range(len(info)):
         if len(colors) == len(info):
             labels[i].set_color(list(colors.values())[i])
