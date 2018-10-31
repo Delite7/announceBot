@@ -12,13 +12,17 @@ class announce(Plugin):
         super(announce, self).load(ctx)
 
     def unload(self, ctx):
+        
         super(announce, self).unload(ctx)
 
     # just wanted a standard ping command
     @Plugin.command('evilping')
     @command_wrapper(log=False)
+    
     def check_bot_heartbeat(self, event):
+        
         event.msg.reply('Evil pong!').after(1).delete()
+        
         log_to_bot_log(self.bot, "<:evilDabbit:233327051686412288> "+str(event.msg.author)+" used the EvilPing command.")
         event.msg.delete()
 
@@ -61,9 +65,12 @@ class announce(Plugin):
         #Variables
         Role_as_an_int = self.config.role_IDs[role_Name]
         Role_as_a_string = str(self.config.role_IDs[role_Name])
+        
         Is_Role_Mentionable = event.guild.roles.get(Role_as_an_int).mentionable
         Role_To_Make_Mentionable = event.guild.roles.get(Role_as_an_int)
+        
         message_to_announce = "<@&" + Role_as_a_string + "> " + announcement_message
+        
         admin_only_channel = self.config.channel_IDs['mod_Channel']
 
         # make sure it's in the right channel
@@ -82,7 +89,7 @@ class announce(Plugin):
 
         else:
             Role_To_Make_Mentionable.update(mentionable=False)
-            event.msg.reply("This role was already mentionable. I made it unmentionable, please try again.")
+            event.msg.reply("This role was already mentionable, I made it unmentionable. Please try again.")
             return
 
     @Plugin.command('update', '<channel_id_to_change>:int> <message_ID_to_edit:int> [edited_announcemented_message:str...]')
@@ -103,7 +110,7 @@ class announce(Plugin):
             event.msg.reply('I have successfully changed the messaged the message you told me to.')
 
         except APIException:
-            event.msg.reply('I can\'t find a message with that ID in a channel with that ID. Please double check that you put the IDs in the correct order. It has to be `!edit <channel ID> <message ID> new message`')
+            event.msg.reply("I can\'t find a message with that ID in a channel with that ID. Please double check that you put the IDs in the correct order. It has to be `!edit <channel ID> <message ID> new message`)
 
 
     #Hopefully clear from the command name, but this command allows you to ping and announce to multiple DESKTOP roles simultaneously.
@@ -155,6 +162,7 @@ class announce(Plugin):
     @Plugin.command('tag', parser=True)
     @Plugin.add_argument('question_title', help="The title of the topic you want to post about.")
     @command_wrapper(log=False)
+                            
     def questions_made_easy(self, event, args):
         #Checks to see if the topic in the list and then replies with the message in annouceBot.py
         args.question_title = args.question_title.lower()
